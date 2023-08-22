@@ -17,6 +17,8 @@
       <p>Sidebar content</p>
     </div>
   </aside>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -44,8 +46,44 @@
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 </body>
-
 <script>
+  
+
+
+    $(document).ready(function() {
+        // Initialize Bootstrap components
+        $('[data-bs-toggle="collapse"]').collapse();
+    });
+  const isDeleteChecked = (e) =>{
+    
+    var deleteID = document.getElementsByClassName("category-delete");
+    if(e.checked){
+      for(i = 0 ; i < deleteID.length ;i++){
+        deleteID[i].style.display = "block";
+      }
+    }
+    if(!e.checked){
+      for(i = 0 ; i < deleteID.length ;i++){
+        deleteID[i].style.display = "none";
+      }
+    }
+    
+  }
+
+  const isEditChecked = (e) =>{
+    var editID =  document.getElementsByClassName("category-edit");
+    if(e.checked){
+      for(i = 0 ; i < editID.length ;i++){
+        editID[i].style.display = "block";
+      }
+    }
+    if(!e.checked){
+      for(i = 0 ; i < editID.length ;i++){
+        editID[i].style.display = "none";
+      }
+    }
+  }
+  
 ClassicEditor
     .create( document.querySelector( '#editor' ) )
     .then( editor => {
@@ -85,10 +123,7 @@ ClassicEditor
         }
     }
 
-    function validateContent(element){
-        value = element.value;
-        console.log(value);
-    }
+    
     
 </script>
 

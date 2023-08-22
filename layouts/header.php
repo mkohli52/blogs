@@ -3,7 +3,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AdminLTE 3 | Starter</title>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -56,8 +57,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/php-blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/php-blogs/categories/show-categories.php" ? "menu-open" : "" ?> ">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/php-blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/php-blogs/categories/show-categories.php" ? "active" : "" ?>">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "menu-open" : "" ?> ">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "active" : "" ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Categories
@@ -66,21 +67,21 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../categories/create-category.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/php-blogs/categories/create-category.php" ? "active" : "" ?>">
+                <a href="../categories/create-category.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" ? "active" : "" ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Create Categories</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../categories/show-categories.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/php-blogs/categories/show-categories.php" ? "active" : "" ?>">
+                <a href="../categories/show-categories.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "active" : "" ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Show Categories</p>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/php-blogs/posts/create-post.php" ? "menu-open" : "" ?>">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/php-blogs/posts/create-post.php" ? "active" : "" ?>">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "active" : "" ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Posts
@@ -89,7 +90,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../posts/create-post.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/php-blogs/posts/create-post.php" ? "active" : "" ?>">
+                <a href="../posts/create-post.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "active" : "" ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add Posts</p>
                 </a>

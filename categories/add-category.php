@@ -2,6 +2,9 @@
     require "../database/db_connection.php";
     $cate_name = $_POST[ 'cate_name' ]; 
     $sub_id = $_POST[ 'sub_cate_id' ];
+    if(isset($_POST["id"])){
+        $id = $_POST["id"];
+    }
     $errors = array();
     
     if(empty($cate_name)){
@@ -12,16 +15,31 @@
     }
 
     if(count($errors) == 0){
-        $sql = "INSERT INTO `categories` (`sub_cate_id`, `cate_name`) VALUES (".$sub_id.", '".$cate_name."');";
-        if ( $conn->query( $sql ) === TRUE ) {
+        if(isset($_POST["id"])){
+            $sql = "UPDATE `categories` SET `cate_name` = '".$cate_name."', `sub_cate_id` = '".$sub_id."' WHERE `categories`.`id` = ".$id.";";
             
-            header("Location: show-categories.php");
+            if ( $conn->query( $sql ) === TRUE ) {
+                
+                header("Location: show-categories.php");
+            }
+        }else{
+
+            $sql = "INSERT INTO `categories` (`sub_cate_id`, `cate_name`) VALUES (".$sub_id.", '".$cate_name."');";
+            if ( $conn->query( $sql ) === TRUE ) {
+                header("Location: show-categories.php");
+            }
         }
         
     }else{
+            
             session_start();
             $_SESSION["errors"] = $errors;
-            header("Location: create-category.php");
+            if(isset($id)){
+                header("Location: create-category.php?id=".$id);
+            }else{
+
+                header("Location: create-category.php");
+            }
     }
     
 

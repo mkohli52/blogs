@@ -31,20 +31,21 @@
             </div>
             <label for="content">Content:</label>
             <div class="form-floating mb-2 border border-3 rounded <?= isset($errors["content"]) ? "border-danger" : "" ?>" id="editor-div">
-                <textarea class="form-control border border-3" id="editor" name="content" style="height: 300px" onkeyup="validateContent(this)"></textarea>
+                <textarea class="form-control border border-3" id="editor" name="content"  style="height: 300px" oninput="validateContent(this)">Hi</textarea>
             </div>
             <?php if(isset($errors["content"])):?>
                 <p class="error-content text-danger" id="error-content" style="display:block;"><?= $errors["content"]?></p>
             <?php endif;?>    
             
-                Select Category:
+            <label >Select Category:</label>
                 <div class="form-group p-4 border border-3 rounded <?= isset($errors["category"]) ? "border-danger" : "" ?>" id="category-div">
                 <?php if($result->num_rows>0):?>
                     <?php while($data = $result->fetch_assoc()):?>
                             <input class="form-check-input " type="checkbox" name="cate_id[]" value="<?= $data["id"]?>">
                             <label class="form-check-label me-5" for="cate_id[]"><?=$data["cate_name"]?></label>
                     <?php endwhile;?>
-                <?php endif;?>                
+                <?php endif;?> 
+                <a href="../categories/create-category.php" style="text-decoration:none">+Add Category</a>               
                     </div>
                         <?php if(isset($errors["category"])):?>
                             <p class="error-category text-danger" id="error-category"><?= $errors["category"]?></p>

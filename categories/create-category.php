@@ -3,9 +3,17 @@ session_start();
 require "../layouts/header.php";?>
 <?php require "../database/db_connection.php"; ?>
 <?php 
+    if(isset($_GET["id"])){
+        $sql =  "SELECT * FROM categories WHERE id =".$_GET["id"].";"; 
+        $result = $conn->query($sql);
+        $data = $result->fetch_assoc();
+        
+    }
+
+        $sql2 = "SELECT * FROM categories;";
+        $result = $conn->query($sql2);
+        
     
-    $sql = "SELECT * FROM categories;";
-    $result = $conn->query($sql);
     
     if(isset($_SESSION["errors"])){
         $errors =  $_SESSION["errors"];
@@ -14,17 +22,25 @@ require "../layouts/header.php";?>
 ?>
 
   <div class="row justify-content-center p-3">
-    <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-dark p-2 mt-2 mb-2 text-center">
-        <h1>Create Category</h1>
+    <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-light p-2 mt-2 mb-2 text-center">
+        <h1><?= isset($_GET["id"]) ? "Edit Category" : "Create Category" ?></h1>
     </div>
   </div>
   <div class="row justify-content-center p-3 ">
-    <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-dark p-5">
-        <h2>Add Category</h2>
+    <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-light p-5">
+        
+        <h2><?= isset($_GET["id"]) ? "Edit Category" : "Add Category" ?></h2>
             <form action="add-category.php" method="post">
+            <?php if( isset( $_GET["id"] ) ): ?>
+                        <div class="mb-3">
+                            <label for="id" class="form-label">Id:</label>
+                            <input type="number" class="form-control" id="id" name="id" aria-describedby="emailHelp" value='<?=$data[ "id" ]?>' readonly>
+                        </div>
+                        <?php endif; ?>   
+                
                 <div class="form-group">
                     <label for="cate_name">Category Name:</label>
-                    <input type="text" class="form-control" id="cate_name" name="cate_name" >
+                    <input type="text" class="form-control" id="cate_name" name="cate_name" value='<?= isset($data["cate_name"]) ? $data["cate_name"] : "" ?>' >
                 </div>
                 <?php if(isset($errors["category"])):?>
                     <p class="error-category text-danger" id="error-category"><?= $errors["category"]?></p>
@@ -35,16 +51,24 @@ require "../layouts/header.php";?>
                 <option value="0">None</option>
                 <?php if($result->num_rows>0):?>
                         <?php while( $category = $result->fetch_assoc()):?>
-                            <option value="<?=$category["id"] ?>"><?=$category["cate_name"] ?></option>
+                            <?php if(isset($_GET["id"])):?>
+                                <?php if($_GET["id"] !=$category["id"] ):?>
+                                    <option value="<?=$category["id"] ?>"><?=$category["cate_name"] ?></option>
+                                <?php endif;?>
+                            <?php else:?>
+                                <option value="<?=$category["id"] ?>"><?=$category["cate_name"] ?></option>    
+                            <?php endif;?>
+                            
                         <?php endwhile;?>
                 <?php endif;?>
-                </select>        
+                </select>
+                        
                 </div>
                 <?php if(isset($errors["sub-category"])):?>
                     <p class="error-category text-danger" id="error-sub-category"><?= $errors["sub-category"]?></p>
                 <?php endif;?> 
                 
-                <button type="submit" class="btn btn-primary mt-3">Add Category</button>
+                <button type="submit" class="btn btn-primary mt-3"><?= isset($_GET["id"]) ? "Edit Category" : "Add Category" ?></button>
             </form>
         </div>
   </div>
