@@ -4,7 +4,7 @@
     <div class="col-md-10 bg-white border border-2 border-light rounded rounded-3 shadow shadow-3  p-1 mt-2 mb-2 text-center">
         <h1>Categories</h1>
     </div>
-    <div class="col-md-2 bg-white border border-2 border-light rounded rounded-3 shadow shadow-3  p-1 mt-3 mb-3 text-center">
+    <div class="col-md-2 bg-white border border-2 border-light rounded rounded-3 shadow shadow-3  p-1 mt-2 mb-2 text-center">
         <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="delete-check" onclick="isDeleteChecked(this);">
         <label class="form-check-label" for="delete-check">
@@ -34,8 +34,16 @@
                             <a href='#category-" . $data["id"] . "' class='collapsed btn btn-secondary d-flex align-items-end ' style='text-decoration:none;' data-bs-toggle='collapse'>
                                 " . $data["cate_name"] . "
                             </a>
-                            <a href='delete-category.php?id=".$data["id"]."' id='category-delete' class=' category-delete  btn  btn-danger align-items-end' style='display:none'><i class='fa fa-trash'></i></a>
-                            <a href='create-category.php?id=".$data["id"]."' id='category-delete' class=' category-edit  btn  btn-info align-items-end' style='display:none'><i class='fa fa-pen'></i></a>
+                            
+                            <div class='row d-flex justify-content-end'>
+                            
+                            <a href='delete-category.php?id=".$data["id"]."' id='category-delete' class=' category-delete  btn  btn-outline-danger align-items-end' style='width:max-content; display:none' onClick='return alertDelete(this)'><i class='fa fa-trash'></i>Delete Category</a>
+                            
+                            
+                            <a href='create-category.php?id=".$data["id"]."' id='category-delete' class=' category-edit  btn  btn-outline-info align-items-end' style='width:max-content; display:none'><i class='fa fa-pen'></i>Edit Category</a>
+                            
+                            </div>
+                            
                             </div>
                             <div id='category-" . $data["id"] . "' class='collapse'>
                                 <ul class='list-group'>";

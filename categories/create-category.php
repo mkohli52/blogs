@@ -40,7 +40,7 @@ require "../layouts/header.php";?>
                 
                 <div class="form-group">
                     <label for="cate_name">Category Name:</label>
-                    <input type="text" class="form-control border border-3 rounded " id="cate_name" name="cate_name" value='<?= isset($data["cate_name"]) ? $data["cate_name"] : "" ?>' onkeyup="validateCategoryName(this)" >
+                    <input type="text" class="form-control border border-3 rounded" placeholder="Category Name" id="cate_name" name="cate_name" value='<?= isset($data["cate_name"]) ? $data["cate_name"] : "" ?>' onkeyup="validateCategoryName(this)" >
                 </div>
                     <p class="error-category text-danger mt-0" id="error-category" style="display:<?= isset($errors["category"]) ? "block" : "none" ?>"><?= isset($errors["category"]) ? $errors["category"] : "Please Enter a Category" ?></p>
                 Sub Category

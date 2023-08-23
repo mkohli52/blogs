@@ -35,6 +35,7 @@
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="../dist/js/adminlte.min.js"></script>
 <script>
 
@@ -60,6 +61,23 @@ $(document).ready(function() {
     <?php endif; ?>
 
 });
+
+  function alertDelete(e){
+    href = e.href;
+    e.href = "#";
+    if (confirm("Are You Sure You Want to Delete?")) {
+        alertify.error('Deleted!');
+          setTimeout({},3000){
+            e.href = href;
+            return true;
+          }
+        
+    } else {
+        alertify.warning("Not Deleted")
+        
+        return false;
+    }
+  }
 
   function validateCategoryName(e){
     if(e.value == ""){
