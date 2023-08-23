@@ -8,15 +8,16 @@
         <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="delete-check" onclick="isDeleteChecked(this);">
         <label class="form-check-label" for="delete-check">
-            delete categories?
+            Delete Categories?
         </label>
         </div>
         <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="delete-check" onclick="isEditChecked(this);">
         <label class="form-check-label" for="delete-check">
-            edit categories?
+            Edit Categories?
         </label>
         </div>
+        <a href="create-category.php" style="text-decoration:underline;">+ Add Category</a>
     </div>
   </div>
 <?php

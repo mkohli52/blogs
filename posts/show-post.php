@@ -13,6 +13,14 @@
 
 
 ?>
+<div class="row ">
+    <div class="col-md-6 d-flex justify-content-start">
+        <a href="create-post.php?id=<?= $data["id"]?>" class="btn btn-outline-warning">Edit</a>
+    </div>
+    <div class="col-md-6 d-flex justify-content-end">
+        <a href="delete-post.php?id=<?= $data["id"]?>" class="btn btn-outline-danger">Delete</a>
+    </div>
+</div>
 <div class="row justify-content-center p-3">
     <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-dark p-1 mt-2 mb-2 text-center">
         <h1><?= $data["title"]?></h1>
