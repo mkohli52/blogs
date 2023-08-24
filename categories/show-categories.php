@@ -11,18 +11,17 @@
             Delete Categories?
         </label>
         </div>
-        <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="delete-check" onclick="isEditChecked(this);">
         <label class="form-check-label" for="delete-check">
             Edit Categories?
         </label>
-        </div>
-        <a href="create-category.php" style="text-decoration:underline;">+ Add Category</a>
+        
     </div>
+    <a href="create-category.php" style="text-decoration:underline;">+ Add Category</a>
   </div>
 <?php
     function ShowCategories($id) {
-        $sql = "SELECT * FROM categories WHERE sub_cate_id=" . $id;
+        $sql = "SELECT * FROM categories WHERE sub_cate_id=" . $id." AND deleted_at IS NULL";
         $result = $GLOBALS["conn"]->query($sql);
         $output = "<ul class='list-group'>";
         
@@ -34,13 +33,14 @@
                             <a href='#category-" . $data["id"] . "' class='collapsed btn btn-secondary d-flex align-items-end ' style='text-decoration:none;' data-bs-toggle='collapse'>
                                 " . $data["cate_name"] . "
                             </a>
+                            <a href='show-category-posts.php?id=".$data["id"]."' class='text-end'>Go to ".$data["cate_name"]." Category<a/>
                             
-                            <div class='row d-flex justify-content-end'>
+                            <div class='row d-flex justify-content-end me-2'>
                             
-                            <a href='delete-category.php?id=".$data["id"]."' id='category-delete' class=' category-delete  btn  btn-outline-danger align-items-end' style='width:max-content; display:none' onClick='return alertDelete(this)'><i class='fa fa-trash'></i>Delete Category</a>
+                            <a href='delete-category.php?id=".$data["id"]."' id='category-delete' class=' mt-2 category-delete  btn  btn-outline-danger align-items-end' style='width:max-content; display:none' onClick='return alertDelete(this)'><i class='fa fa-trash'></i>Delete Category</a>
                             
                             
-                            <a href='create-category.php?id=".$data["id"]."' id='category-delete' class=' category-edit  btn  btn-outline-info align-items-end' style='width:max-content; display:none'><i class='fa fa-pen'></i>Edit Category</a>
+                            <a href='create-category.php?id=".$data["id"]."' id='category-delete' class=' ms-2 mt-2 category-edit  btn  btn-outline-info align-items-end' style='width:max-content; display:none'><i class='fa fa-pen'></i>Edit Category</a>
                             
                             </div>
                             

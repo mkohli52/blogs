@@ -32,7 +32,7 @@
             $stmt = $conn->prepare("UPDATE `blogs` SET `description` = ? ,`title` = ? ,`content` = ? WHERE `blogs`.`id` = ?;");
             $stmt->bind_param("sssi",$description,$title,$content,$id);
             if($stmt->execute()){
-                header("Location: ../posts/show-post.php?post=".$_POST["id"]);
+                header("Location: ../posts/show-post.php?post=".$_POST["id"]."&success=true");
             }else{
                 echo "Not Updated";
             }
@@ -49,7 +49,7 @@
                     foreach($cate_id as $id){
                         $sql3 = "INSERT INTO `blog_category` (`id`, `blog_id`, `category_id`) VALUES (NULL, '".$blogId."', '".$id."');";
                         if($conn->query($sql3) == TRUE){
-                            header("Location: ../categories/show-categories.php");
+                            header("Location: ../categories/show-categories.php?success=true");
                         }
                         
                     }

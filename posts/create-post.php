@@ -26,7 +26,7 @@
   <div class="row justify-content-center p-3">
     <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-light p-5">
         <h2><?= isset($_GET["id"]) ? "Edit Post" : "Add Post" ?></h2>
-            <form action="add-post.php" method="post" id="create-post"  >
+            <form action="add-post.php" method="post" id="create-post" <?= isset($_GET["id"]) ? " onSubmit='return confirmEdit()'" : "" ?>  >
             <?php if( isset( $_GET["id"] ) ): ?>
                         <div class="mb-3">
                             <label for="id" class="form-label">Id:</label>
@@ -59,7 +59,7 @@
                                 <label class="form-check-label me-5" for="cate_id[]"><?=$data["cate_name"]?></label>
                         <?php endwhile;?>
                     <?php endif;?> 
-                    <a href="../categories/create-category.php"  style="text-decoration:none; position:relative; right:-45%;">+Add Category</a>               
+                    <a href="../categories/create-category.php"  style="text-decoration:none;">+Add Category</a>               
                         </div>
                             <?php if(isset($errors["category"])):?>
                                 <p class="error-category text-danger" id="error-category"><?= $errors["category"]?></p>

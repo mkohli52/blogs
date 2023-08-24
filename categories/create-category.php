@@ -30,7 +30,7 @@ require "../layouts/header.php";?>
     <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-light p-5">
         
         <h2><?= isset($_GET["id"]) ? "Edit Category" : "Add Category" ?></h2>
-            <form action="add-category.php" id="create-category" method="post">
+            <form action="add-category.php" id="create-category" method="post" >
             <?php if( isset( $_GET["id"] ) ): ?>
                         <div class="mb-3">
                             <label for="id" class="form-label">Id:</label>
@@ -66,7 +66,7 @@ require "../layouts/header.php";?>
                     <p class="error-category text-danger" id="error-sub-category"><?= $errors["sub-category"]?></p>
                 <?php endif;?> 
                 
-                <button type="submit" class="btn btn-primary mt-3"><?= isset($_GET["id"]) ? "Edit Category" : "Add Category" ?></button>
+                <button type="submit" class="btn btn-primary mt-3"  ><?= isset($_GET["id"]) ? "Edit Category" : "Add Category" ?></button>
             </form>
         </div>
   </div>

@@ -18,7 +18,7 @@
         <a href="create-post.php?id=<?= $data["id"]?>" class="btn btn-outline-warning">Edit</a>
     </div>
     <div class="col-md-6 d-flex justify-content-end">
-        <a href="delete-post.php?id=<?= $data["id"]?>" class="btn btn-outline-danger" onclick="return alertDelete()">Delete</a>
+        <a href="delete-post.php?id=<?= $data["id"]?>" class="btn btn-outline-danger" onclick="return alertDelete(this)">Delete</a>
     </div>
 </div>
 <div class="row justify-content-center p-3">

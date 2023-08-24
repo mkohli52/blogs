@@ -36,13 +36,50 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
 <script src="../dist/js/adminlte.min.js"></script>
 <script>
+const searchParams = new URLSearchParams(window.location.search);
+if(searchParams.has('success')){
+  if(searchParams.get('success') == "true"){
+    if(searchParams.has('post')){
+      alertify.success('Editted Successfully');
 
+    }else{
 
+      alertify.success('Created Successfully');
+    }
+  }
+}
+
+//Category Alert
 $(document).ready(function() {
-    
-    console.log("Inside document ready");
+  $('#create-category').on('submit', function(event) {
+    event.preventDefault(); 
+    if(searchParams.has('id')){
+          confirmEdit().then(function(shouldSubmit) {
+              if (shouldSubmit) {
+                $('#create-category')[0].submit(); 
+              }
+          });
+        }else{
+          $('#create-category')[0].submit();
+        }
+    });
+    $('#create-post').on('submit', function(event) {
+        event.preventDefault(); 
+        if(searchParams.has('id')){
+          confirmEdit().then(function(shouldSubmit) {
+          if (shouldSubmit) {
+            $('#create-post')[0].submit(); 
+              }
+          });
+        }else{
+          $('#create-post')[0].submit();
+        }
+    });
+
+
     <?php if($_SERVER["PHP_SELF"] == "/blogs/posts/create-post.php"): ?>
       CKEDITOR.replace( 'editor' );
     const editor = CKEDITOR.instances.editor;
@@ -62,22 +99,55 @@ $(document).ready(function() {
 
 });
 
+
+//Delete Alert
+
   function alertDelete(e){
     href = e.href;
     e.href = "#";
-    if (confirm("Are You Sure You Want to Delete?")) {
-        alertify.error('Deleted!');
-          setTimeout({},3000){
-            e.href = href;
-            return true;
-          }
-        
-    } else {
-        alertify.warning("Not Deleted")
-        
-        return false;
-    }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        setTimeout(() => {
+          window.location = href;
+        }, 1000);
+      }
+    })
   }
+
+  function confirmEdit() {
+    return new Promise(function(resolve) {
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                Swal.fire('Saved!', '', 'success');
+                setTimeout(function() {
+                    resolve(true);
+                }, 1000);
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info');
+                resolve(false);
+            }
+        });
+    });
+}
 
   function validateCategoryName(e){
     if(e.value == ""){

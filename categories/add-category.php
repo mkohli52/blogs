@@ -26,7 +26,7 @@
 
             $sql = "INSERT INTO `categories` (`sub_cate_id`, `cate_name`) VALUES (".$sub_id.", '".$cate_name."');";
             if ( $conn->query( $sql ) === TRUE ) {
-                header("Location: show-categories.php");
+                header("Location: show-categories.php?success=true");
             }
         }
         
