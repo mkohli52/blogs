@@ -45,6 +45,11 @@ if(searchParams.has('pnf')){
     alertify.error('Post Not Found!!!');
   }
 }
+if(searchParams.has('na')){
+  if(searchParams.get('na') == "true"){
+    alertify.error('Not Allowed!!!');
+  }
+}
 
 
 if(searchParams.has('success')){
@@ -61,6 +66,65 @@ if(searchParams.has('success')){
 
 //Category Alert
 $(document).ready(function() {
+  $("#edit-form").validate({
+    rules: {
+          name: {
+              required: true
+          },
+          email: {
+              required: true,
+              email: true
+          },
+          role: {
+              required: true,
+          }
+      },
+      messages: {
+          name: {
+              required: "Please enter a name"
+          },
+          email: {
+              required: "Please enter an email address",
+              email: "Please enter a valid email address"
+          },
+          role: {
+              required: "Please select a role",
+          }
+      },
+      errorElement: 'div',
+                errorPlacement: function (error, element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-floating').append(error);
+                },
+                highlight: function (element, errorClass, validClass) {
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    $(element).removeClass('is-invalid');
+                },
+                submitHandler: function (form) {
+                    var formData = $(form).serializeArray();
+                    var dataObject = {};
+
+                    formData.forEach(function (element) {
+                        dataObject[element.name] = element.value;
+                    });
+                    console.log(dataObject);
+
+                    $.post("edit-user-details.php", dataObject, function (data) {
+                        if (data.status) {
+                            alertify.success(data.message);
+                            setTimeout(()=>{
+                                window.location.replace("../user/list-users.php");
+                            },1000)
+                        } else {
+                            alertify.error(data.message);
+                        }
+                    }, "json");
+                }
+  })
+
+
   $('#create-category').on('submit', function(event) {
     event.preventDefault(); 
     if(searchParams.has('id')){
@@ -87,7 +151,7 @@ $(document).ready(function() {
     });
 
 
-    <?php if($_SERVER["PHP_SELF"] == "/blogs/posts/create-post.php"): ?>
+    <?php if ($_SERVER['PHP_SELF'] == '/blogs/posts/create-post.php'): ?>
       CKEDITOR.replace( 'editor' );
     const editor = CKEDITOR.instances.editor;
     editor.on('key',function(event){
