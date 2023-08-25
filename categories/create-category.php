@@ -10,7 +10,7 @@ require "../layouts/header.php";?>
         
     }
 
-        $sql2 = "SELECT * FROM categories;";
+        $sql2 = "SELECT * FROM categories WHERE deleted_at IS NULL;";
         $result = $conn->query($sql2);
         
     

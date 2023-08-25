@@ -26,14 +26,14 @@
         $output = "<ul class='list-group'>";
         
         while ($data = $result->fetch_assoc()) {
-            $sql2 = "SELECT b.id AS blog_id, b.title AS blog_title, c.id AS category_id, c.cate_name AS category_name FROM blogs b JOIN blog_category bc ON b.id = bc.blog_id JOIN categories c ON bc.category_id = c.id WHERE c.id=" . $data["id"] . ";";
+            $sql2 = "SELECT b.id AS blog_id, b.title AS blog_title, c.id AS category_id, c.cate_name AS category_name FROM blogs b  JOIN blog_category bc ON b.id = bc.blog_id JOIN categories c ON bc.category_id = c.id WHERE c.id=" . $data["id"] . " AND b.deleted_at IS NULL ;";
     
             $output .= "<li class='list-group-item'>
                             <div class='row'>
                             <a href='#category-" . $data["id"] . "' class='collapsed btn btn-secondary d-flex align-items-end ' style='text-decoration:none;' data-bs-toggle='collapse'>
                                 " . $data["cate_name"] . "
                             </a>
-                            <a href='show-category-posts.php?id=".$data["id"]."' class='text-end'>Go to ".$data["cate_name"]." Category<a/>
+                            <a href='show-category-posts.php?id=".$data["id"]."' class='text-start'>Go to ".$data["cate_name"]." Category<a/>
                             
                             <div class='row d-flex justify-content-end me-2'>
                             

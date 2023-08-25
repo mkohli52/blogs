@@ -40,6 +40,13 @@
 <script src="../dist/js/adminlte.min.js"></script>
 <script>
 const searchParams = new URLSearchParams(window.location.search);
+if(searchParams.has('pnf')){
+  if(searchParams.get('pnf') == "true"){
+    alertify.error('Post Not Found!!!');
+  }
+}
+
+
 if(searchParams.has('success')){
   if(searchParams.get('success') == "true"){
     if(searchParams.has('post')){
@@ -132,7 +139,7 @@ $(document).ready(function() {
         Swal.fire({
             title: 'Do you want to save the changes?',
             showDenyButton: true,
-            showCancelButton: true,
+            showCancelButton: false,
             confirmButtonText: 'Save',
             denyButtonText: `Don't save`,
         }).then(function(result) {
