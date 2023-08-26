@@ -1,5 +1,7 @@
 <?php
     require "../database/db_connection.php";
+    require "../auth/auth.php";
+    $auth = new Auth($_COOKIE["email"]);
     $cate_name = $_POST[ 'cate_name' ]; 
     $sub_id = $_POST[ 'sub_cate_id' ];
     if(isset($_POST["id"])){
@@ -24,7 +26,7 @@
             }
         }else{
 
-            $sql = "INSERT INTO `categories` (`sub_cate_id`, `cate_name`) VALUES (".$sub_id.", '".$cate_name."');";
+            $sql = "INSERT INTO `categories` (`sub_cate_id`, `cate_name`,`user_id`) VALUES (".$sub_id.", '".$cate_name."',".$auth->id().");";
             if ( $conn->query( $sql ) === TRUE ) {
                 header("Location: show-categories.php?success=true");
             }

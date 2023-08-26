@@ -5,9 +5,13 @@ $response = array();
 $id = $_POST["id"];
 $name = $_POST["name"];
 $email = $_POST["email"];
-$role = $_POST["role"];
+if(isset($_POST["role"])){
+    $role = $_POST["role"];
+    $sql = "UPDATE `users` SET `roles` = '".$role."',`name` = '".$name."',`email` = '".$email."'  WHERE `users`.`id`=".$id.";";
+}else{
+    $sql = "UPDATE `users` SET `name` = '".$name."',`email` = '".$email."'  WHERE `users`.`id`=".$id.";";
+}
 
-$sql = "UPDATE `users` SET `roles` = '".$role."',`name` = '".$name."',`email` = '".$email."'  WHERE `users`.`id`=".$id.";";
 
 if($conn->query($sql)){
     $response["status"] = true;

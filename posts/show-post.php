@@ -11,6 +11,7 @@ if ($result->num_rows > 0) {
     echo '<script>window.location.href = "../categories/show-categories.php?pnf=true";</script>';
 }
 ?>
+<?php if($auth->role()!= 1 || $auth->id() == $data["user_id"]): ?>
 <div class="row p-2">
     <div class="col-md-6 d-flex justify-content-start">
         <a href="create-post.php?id=<?= $data[
@@ -23,6 +24,7 @@ if ($result->num_rows > 0) {
         ] ?>" class="btn btn-outline-danger" onclick="return alertDelete(this)">Delete</a>
     </div>
 </div>
+<?php endif; ?>
 <div class="row justify-content-center p-3">
     <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-1 mt-3 mb-2 text-center">
         <h1><?= isset($data['title']) ? $data["title"] : "Blog Not Found!" ?></h1>
