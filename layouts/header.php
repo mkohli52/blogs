@@ -121,9 +121,19 @@
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            
+            <?php if($auth->role() != 1):?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../user/logout-user.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "active" : "" ?>">
+                <a href="../user/list-users.php" class="nav-link ">
+                  <p>List Users</p>
+                </a>
+              </li>
+            </ul>
+            <?php endif;?>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../user/logout-user.php" class="nav-link ">
                   <p>Logout</p>
                 </a>
               </li>
