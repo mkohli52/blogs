@@ -74,7 +74,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "menu-open" : "" ?> ">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "active" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-category-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/user-all-posts.php"  ? "active" : "" ?>">
               <i class="nav-icon fas fa-ellipsis-h"></i>
               <p>
                 Categories
@@ -96,8 +96,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "menu-open" : "" ?>">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "active" : "" ?>">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-post.php" ? "active" : "" ?>">
               <i class="nav-icon fas fa-pencil-alt"></i>
               <p>
                 Posts
@@ -112,9 +112,25 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../posts/show-posts-user.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" ? "active" : "" ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>My Posts</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../posts/all-posts.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "active" : "" ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Posts</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="nav-link ">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/user/list-users.php"  ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/user/list-users.php"  ? "active" : "" ?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 User
@@ -125,7 +141,8 @@
             <?php if($auth->role() != 1):?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../user/list-users.php" class="nav-link ">
+                <a href="../user/list-users.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/user/list-users.php"  ? "active" : "" ?>">
+                <i class="far fa-circle nav-icon"></i>
                   <p>List Users</p>
                 </a>
               </li>
@@ -157,5 +174,5 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div class="card">
+            <div class="card" id="all-data">
             

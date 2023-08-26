@@ -1,9 +1,11 @@
 <?php
 require '../database/db_connection.php';
-
+require_once "../auth/auth.php";
 $title = $_POST['title'];
 $description = $_POST['description'];
 $content = $_POST['content'];
+$auth = new Auth($_COOKIE["email"]);
+
 $cateid;
 if (isset($_POST['cate_id'])) {
     $cate_id = $_POST['cate_id'];
@@ -45,9 +47,9 @@ if (count($errors) == 0) {
         }
     } else {
         $stmt = $conn->prepare(
-            'INSERT INTO blogs (title, description, content) VALUES (?,?,?)'
+            'INSERT INTO blogs (title, description, content,user_id) VALUES (?,?,?,?)'
         );
-        $stmt->bind_param('sss', $title, $description, $content);
+        $stmt->bind_param('sssi', $title, $description, $content,$auth->id());
         $sql2 = 'SELECT * FROM blogs ORDER BY id DESC LIMIT 1';
 
         if ($stmt->execute()) {

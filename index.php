@@ -1,1 +1,1 @@
-<?php header("Location: categories/create-category.php")?>
+<?php header("Location: posts/all-posts.php")?>

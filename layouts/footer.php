@@ -66,6 +66,48 @@ if(searchParams.has('success')){
 
 //Category Alert
 $(document).ready(function() {
+  $('#search-form').validate({
+    rules:{
+      query:{
+        required: true,
+        minlength: 4,
+      }
+    },
+    messages:{
+      query:{
+        required: "please enter your query",
+        minlength: "search query should be of minimum 4 characters",
+      }
+  },errorElement: 'div',
+  errorPlacement: function (error, element) {
+      error.addClass('invalid-feedback');
+      element.closest('.form-floating').append(error);
+  },
+  highlight: function (element, errorClass, validClass) {
+      $(element).addClass('is-invalid');
+  },
+  unhighlight: function (element, errorClass, validClass) {
+      $(element).removeClass('is-invalid');
+  },submitHandler: function (form) {
+                    var formData = $(form).serializeArray();
+                    var dataObject = {};
+
+                    formData.forEach(function (element) {
+                        dataObject[element.name] = element.value;
+                    });
+                    console.log(dataObject);
+                    $.post("../search/get-data.php", dataObject, function (data) {
+                        $("#all-data").empty();
+                        data.forEach(element => {
+                          console.log(element);
+                        });
+
+                    }, "json");
+                }
+})
+  
+
+
   $("#edit-form").validate({
     rules: {
           name: {
@@ -109,9 +151,9 @@ $(document).ready(function() {
                     formData.forEach(function (element) {
                         dataObject[element.name] = element.value;
                     });
-                    console.log(dataObject);
 
                     $.post("edit-user-details.php", dataObject, function (data) {
+                      console.log("i am here");
                         if (data.status) {
                             alertify.success(data.message);
                             setTimeout(()=>{
