@@ -4,7 +4,7 @@ require '../database/db_connection.php';
 $email = $_POST['email'];
 $password = $_POST['password'];
 $response = [];
-$sql = "SELECT * FROM users  WHERE email ='" . $email . "'";
+$sql = "SELECT * FROM users  WHERE email ='" . $email . "' AND deleted_at IS NULL";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     $data = $result->fetch_assoc();
@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
     }
 } else {
     $response['status'] = false;
-    $response['message'] = 'Wrong email id or password';
+    $response['message'] = 'User Not Found';
 }
 
 echo json_encode($response);

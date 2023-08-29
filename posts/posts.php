@@ -73,7 +73,8 @@ $sql =
         
         GROUP BY b.id, b.title, b.description, b.content, u.id, u.name ORDER BY '.(isset($_GET["sortTitle"]) ? $byTitle : (isset($_GET["sortCategory"]) ? $byCategory : (isset($_GET["sortAuthor"]) ? $byAuthor : (isset($_GET["sortDescription"]) ? $byDescription : $byTitle) ) ) ).' '.(isset($_GET["sortTitle"]) ? $sortTitle : (isset($_GET["sortCategory"]) ? $sortCategory : (isset($_GET["sortAuthor"]) ? $sortAuthor : (isset($_GET["sortDescription"]) ? $sortDescription : $sortTitle)) ) ).'
         LIMIT '.$page_first_result.','.$results_per_page.' ;';
-    $result = $conn->query($sql);    
+    $result = $conn->query($sql);
+       
 ?>
 
     
@@ -93,13 +94,17 @@ $sql =
         </form>
     <thead>
         <tr>
-            <th scope="col" class="text-center"><a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortTitle"]) ? "border border-2" : "" ?>" href="?sortTitle=<?=$sortTitle?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>" >Title </br><?= !isset($_GET["sortTitle"])  ? "↓↑" : ($_GET["sortTitle"] == "DESC" ? "↓" : "↑") ?> </a>
+            <th scope="col" class="text-center">
+                <a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortTitle"]) ? "border border-2" : "" ?>" href="?sortTitle=<?=$sortTitle?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>" >Title </br><?= !isset($_GET["sortTitle"])  ? "↓↑" : ($_GET["sortTitle"] == "DESC" ? "↓" : "↑") ?> </a>
             </th>
-            <th scope="col" class="text-center"><a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortCategory"]) ? "border border-2" : "" ?>" href="?sortCategory=<?=$sortCategory?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>">Category </br><?= !isset($_GET["sortCategory"])  ? "↓↑" : ($_GET["sortCategory"] == "DESC" ? "↓" : "↑") ?> </a>
+            <th scope="col" class="text-center">
+                <a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortCategory"]) ? "border border-2" : "" ?>" href="?sortCategory=<?=$sortCategory?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>">Category </br><?= !isset($_GET["sortCategory"])  ? "↓↑" : ($_GET["sortCategory"] == "DESC" ? "↓" : "↑") ?> </a>
         </th>
-        <th scope="col" class="text-center"><a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortAuthor"]) ? "border border-2" : "" ?>" href="?sortAuthor=<?=$sortAuthor?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>">Author <?= !isset($_GET["sortAuthor"])  ? "↓↑" : ($_GET["sortAuthor"] == "DESC" ? "↓" : "↑") ?> </a>
+        <th scope="col" class="text-center">
+            <a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortAuthor"]) ? "border border-2" : "" ?>" href="?sortAuthor=<?=$sortAuthor?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>">Author</br><?= !isset($_GET["sortAuthor"])  ? "↓↑" : ($_GET["sortAuthor"] == "DESC" ? "↓" : "↑") ?> </a>
             </th>
-            <th scope="col" class="text-center"><a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortDescription"]) ? "border border-2" : "" ?>" href="?sortDescription=<?=$sortDescription?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>">Description </br><?= !isset($_GET["sortDescription"])  ? "↓↑" : ($_GET["sortDescription"] == "DESC" ? "↓" : "↑") ?></a></th>
+            <th scope="col" class="text-center">
+                <a class="btn btn-light d-flex justify-content-center <?= isset($_GET["sortDescription"]) ? "border border-2" : "" ?>" href="?sortDescription=<?=$sortDescription?><?= isset($search) ? "&search=".$search."" : ""  ?><?= isset($page) ? "&page=".$page."" : ""  ?><?= isset($_GET["by"]) ? "&by=".$_GET["by"]."" : ""  ?>">Description </br><?= !isset($_GET["sortDescription"])  ? "↓↑" : ($_GET["sortDescription"] == "DESC" ? "↓" : "↑") ?></a></th>
             <th scope="col" class="text-center" ><a  class="btn btn-light d-flex justify-content-center">Action</br>&nbsp</a></th>
         </tr>
     </thead>

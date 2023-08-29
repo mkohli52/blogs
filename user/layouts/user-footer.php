@@ -59,10 +59,12 @@
                                 window.location.replace("/blogs/index.php");
                             },2000)
                         } else {
+                            $(form).validate().resetForm();
                             var validator = $(form).validate();
                             validator.showErrors({
                                 email: data.message
                             })
+                            
                             // toastr.error(data.message);
                         }
                     }, "json");

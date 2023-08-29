@@ -23,8 +23,8 @@ $result = $conn->query($sql);
             ? $category_data['cate_name']
             : 'No Category Available' ?></h1>
     </div>
-  </div>
-  <div class="row justify-content-center p-3">
+</div>
+<div class="row justify-content-center p-3">
     <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-3">
         <h1 class="text-center">Posts</h1>
         <?php if ($result->num_rows == 0): ?>
@@ -93,15 +93,15 @@ $result = $conn->query($sql);
                     $output .=
                         ShowCategories($data['id']) .
                         "</ul>
-                                  </div>
-                              </li>";
+                            </div>
+                                </li>";
                 }
                 $output .= '</ul>';
                 return $output;
             } ?>
                 <?= ShowCategories($_GET['id']) ?>
         <?php endif; ?>    
-  <?php while ($blog_id = $result->fetch_assoc()): ?>
+<?php while ($blog_id = $result->fetch_assoc()): ?>
     <?php
     $sql =
         'SELECT * FROM blogs WHERE id=' .
@@ -119,13 +119,13 @@ $result = $conn->query($sql);
     <div class="row justify-content-center p-3">
         <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-5">
             <h2>Description:</h2>
-            <p><?= $blogs_data['description'] ?></p>
+                <p><?= $blogs_data['description'] ?></p>
             <h2>Content:</h2>
             <?= $blogs_data['content'] ?>
         </div>
     </div>
     <?php endif; ?>
     <?php endwhile; ?>
-  </div>
+</div>
 
 <?php require '../layouts/footer.php'; ?>
