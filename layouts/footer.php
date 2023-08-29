@@ -34,6 +34,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
@@ -69,6 +70,7 @@ if(searchParams.has('success')){
 
 //Category Alert
 $(document).ready(function() {
+  $("#list-users").DataTable();
   $.ajax({
   url: 'https://randomuser.me/api/',
   dataType: 'json',
@@ -105,7 +107,7 @@ $(document).ready(function() {
           dataObject[element.name] = element.value;
       });
       $.post("../search/get-data.php", dataObject, function (data) {
-
+        console.log(data);
         var html = `<div class="row justify-content-center p-3">
                     <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-1 mt-3 mb-2 text-center">
                         <h1 class="text-center">All Posts by `+ (dataObject.by == 1 ? "User:" : (dataObject.by == 2 ? "Category:" : "Name:")) +` `+dataObject.query+`</h1>
@@ -138,7 +140,7 @@ $(document).ready(function() {
           data = `<h1>No Records Found<h1>`;
           $("#all-data").append(data);
         }
-       }, "json");
+      }, "json");
     }
 });
   

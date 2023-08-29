@@ -9,7 +9,7 @@
 } ?>
 <?php if ($auth->role() != 1): ?>
     <h1 class="text-center">Users</h1>
-    <table class="table">
+    <table class="table" id="list-users">
         <thead>
             <tr>
                 <th scope="col">Id</th>
