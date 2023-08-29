@@ -209,7 +209,7 @@
             </select>
           </span>
         </div>
-        <input type="text" class="form-control border border-dark" aria-label="Default" name="query" style="height: auto;" aria-describedby="inputGroup-sizing-default">
+        <input type="text" class="form-control border border-dark" aria-label="Default" name="query" style="height: auto;" aria-describedby="inputGroup-sizing-default" onkeyup="submitForm()">
       </div>
         </div>
       </div>

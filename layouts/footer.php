@@ -43,6 +43,9 @@
   function sortChange(){
     $("#search-form").submit();
   }
+  function submitForm(){
+    $("#search-form").submit();
+  }
 const searchParams = new URLSearchParams(window.location.search);
 if(searchParams.has('pnf')){
   if(searchParams.get('pnf') == "true"){
