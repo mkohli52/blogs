@@ -17,7 +17,7 @@
         </label>
         
     </div>
-    <a href="create-category.php" style="text-decoration:underline;">+ Add Category</a>
+    <a href="create-category.php" style="text-decoration:underline;" class="text-white">+ Add Category</a>
   </div>
 <?php
     function ShowCategories($id) {

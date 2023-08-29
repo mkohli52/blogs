@@ -39,6 +39,9 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.all.min.js" integrity="sha256-S/HO+Ru8zrLDmcjzwxjl18BQYDCvFDD7mPrwJclX6U8=" crossorigin="anonymous"></script>
 <script src="../dist/js/adminlte.min.js"></script>
 <script>
+  function sortChange(){
+    $("#search-form").submit();
+  }
 const searchParams = new URLSearchParams(window.location.search);
 if(searchParams.has('pnf')){
   if(searchParams.get('pnf') == "true"){
@@ -66,11 +69,18 @@ if(searchParams.has('success')){
 
 //Category Alert
 $(document).ready(function() {
+  $.ajax({
+  url: 'https://randomuser.me/api/',
+  dataType: 'json',
+  success: function(data) {
+    console.log(data);
+  }
+});
   $('#search-form').validate({
     rules:{
       query:{
         required: true,
-        minlength: 4,
+        minlength: 2,
       }
     },
     messages:{
@@ -89,22 +99,48 @@ $(document).ready(function() {
   unhighlight: function (element, errorClass, validClass) {
       $(element).removeClass('is-invalid');
   },submitHandler: function (form) {
-                    var formData = $(form).serializeArray();
-                    var dataObject = {};
+      var formData = $(form).serializeArray();
+      var dataObject = {};
+      formData.forEach(function (element) {
+          dataObject[element.name] = element.value;
+      });
+      $.post("../search/get-data.php", dataObject, function (data) {
 
-                    formData.forEach(function (element) {
-                        dataObject[element.name] = element.value;
-                    });
-                    console.log(dataObject);
-                    $.post("../search/get-data.php", dataObject, function (data) {
-                        $("#all-data").empty();
-                        data.forEach(element => {
-                          console.log(element);
-                        });
-
-                    }, "json");
-                }
-})
+        var html = `<div class="row justify-content-center p-3">
+                    <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-1 mt-3 mb-2 text-center">
+                        <h1 class="text-center">All Posts by `+ (dataObject.by == 1 ? "User:" : (dataObject.by == 2 ? "Category:" : "Name:")) +` `+dataObject.query+`</h1>
+                    </div>  
+                </div>`;
+          $("#all-data").empty();
+          $("#all-data").html(html);
+          if(data.length > 0){ 
+          data.forEach(element => {
+            var data = `
+              <div class="row justify-content-center p-3">
+              <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-1 mt-3 mb-2 text-center">
+                  <h1 class="text-start"><a href="../posts/show-post.php?post=`+element.id+`">`+element.title+`</a></h1>
+              </div>
+              <div class="col-md-6 text-start ">
+              </div>
+              <div class="col-md-6 text-end ">
+              Author:<a href="../posts/user-all-posts.php?id=`+element.user_id+`" class="text-end ">`+element.user_name+`</a>
+              </div>
+              <div class="row justify-content-center p-3">
+                  <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-5">
+                      <h2>Description:</h2>
+                      <p>`+element.description+`</p>
+                  </div>
+              </div>
+            `;
+            $("#all-data").append(data);
+          });
+        }else{
+          data = `<h1>No Records Found<h1>`;
+          $("#all-data").append(data);
+        }
+       }, "json");
+    }
+});
   
 
 
