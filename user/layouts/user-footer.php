@@ -59,7 +59,11 @@
                                 window.location.replace("/blogs/index.php");
                             },2000)
                         } else {
-                            toastr.error(data.message);
+                            var validator = $(form).validate();
+                            validator.showErrors({
+                                email: data.message
+                            })
+                            // toastr.error(data.message);
                         }
                     }, "json");
                 }

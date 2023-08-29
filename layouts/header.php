@@ -96,8 +96,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "menu-open" : "" ?>">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-post.php" ? "active" : "" ?>">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "menu-open" : "" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-post.php" ? "active" : "" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "active" : "" ?>">
               <i class="nav-icon fas fa-pencil-alt"></i>
               <p>
                 Posts
@@ -125,6 +125,14 @@
                 <a href="../posts/all-posts.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "active" : "" ?>">
                   <i class="far fa-circle nav-icon"></i>
                   <p>All Posts</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../posts/posts.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "active" : "" ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Posts</p>
                 </a>
               </li>
             </ul>
@@ -170,9 +178,46 @@
     
 
     <!-- Main content -->
-    <div class="content mt-5">
+    <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+    <button class="accordion-button bg-secondary " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    <i class="far fa fa-search "></i> &nbsp; Search
+    </button>
+    </h2>
+    </div>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+        <form id="search-form" >
+      <div class="input-group mb-3 p-4 border border-dark rounded">
+        <div class="input-group-prepend border border-dark">
+          <span class="input-group-text" id="inputGroup-sizing-default">Search by &nbsp
+            <select class="custom-select custom-select-sm" name=by onchange="sortChange()">
+              <option value="1">Users</option>
+              <option value="2">Categories</option>
+              <option value="3">Posts</option>
+            </select>
+          </span>
+          <span class="input-group-text" id="inputGroup-sizing-default">Sort by &nbsp
+            <select class="custom-select custom-select-sm" name=sortby onchange="sortChange()">
+              <option value="1">Newest First</option>
+              <option value="2">Oldest First</option>
+              <option value="3">A to Z</option>
+              <option value="4">Z to A</option>
+            </select>
+          </span>
+        </div>
+        <input type="text" class="form-control border border-dark" aria-label="Default" name="query" style="height: auto;" aria-describedby="inputGroup-sizing-default">
+      </div>
+        </div>
+      </div>
+    </div>
+    
+    </form> 
+    <div class="content mt-2">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div class="card" id="all-data">
+          <div class="card " id="all-data">
+            
             

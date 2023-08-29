@@ -5,7 +5,7 @@
 }
 $prevPage = $page-1;
 $nextPage = $page+1;
-$results_per_page = 3;  
+$results_per_page = 10;  
 $page_first_result = ($page-1) * $results_per_page;
 
 ?>

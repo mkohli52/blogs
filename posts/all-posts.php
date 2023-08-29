@@ -18,19 +18,7 @@ $sql =
     $results_per_page;
 $result = $conn->query($sql);
 ?>
-<form action="" method="GET" id="search-form">
-            <div class="input-group mb-3 p-4">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-default">Search by &nbsp
-                <select class="custom-select custom-select-sm" name=by>
-                    <option value="1">Users</option>
-                    <option value="2">Categories</option>
-                </select>
-                </span>
-            </div>
-            <input type="text" class="form-control" aria-label="Default" name="query" style="height: auto;" aria-describedby="inputGroup-sizing-default">
-            </div>
-        </form> 
+
     <?php require '../pagination/pagination-layout.php'; ?>
    <div class="row justify-content-center p-3">
         <div class="col-md-12 bg-white border border-2 rounded rounded-3 shadow shadow-3 border-secondary p-1 mt-3 mb-2 text-center">

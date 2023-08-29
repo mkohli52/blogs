@@ -99,10 +99,10 @@ if (isset($_SESSION['errors'])) {
                         : '' ?>" id="category-div">
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($data = $result->fetch_assoc()): ?>
-                                <input class="form-check-input " type="checkbox" name="cate_id[]" value="<?= $data[
+                                <input class="form-check-input " type="checkbox" id="cate_id[<?= $data['id']?>]" name="cate_id[]" value="<?= $data[
                                     'id'
                                 ] ?>">
-                                <label class="form-check-label me-5" for="cate_id[]"><?= $data[
+                                <label class="form-check-label me-5" for="cate_id[<?= $data['id']?>]"><?= $data[
                                     'cate_name'
                                 ] ?></label>
                         <?php endwhile; ?>
