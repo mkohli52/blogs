@@ -73,7 +73,24 @@ if(searchParams.has('success')){
 
 //Category Alert
 $(document).ready(function() {
-  $("#list-users").DataTable();
+  $("#list-users").DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: {
+        url: '../user/jquery-user-list.php',
+        type: 'POST'
+    },
+    columns: [
+        { data: 'id' },
+        { data: 'name' },
+        { data: 'email' },
+        { data: 'role' },
+        { data: 'action', orderable: false } 
+    ],
+    order: [[0, 'asc']]
+});
+    // 
+  
   $.ajax({
   url: 'https://randomuser.me/api/',
   dataType: 'json',

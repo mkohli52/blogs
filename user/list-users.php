@@ -19,16 +19,8 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-            <?php while ($data = $result->fetch_assoc()): ?>
-                <tr>
-                    <th scope="row"><?= $data['id'] ?></th>
-                    <td><?= $data['name']; ?></td>
-                    <td><?= $data['email']; ?></td>
-                    <td><?= $data["role"] ?></td>
-                    <td><a class="btn btn-outline-info me-2" href="edit-user.php?id=<?=$data["id"]?>">Edit</a><a class="btn btn-outline-danger" href="">Delete</a></td>
-                </tr>
-            <?php endwhile; ?>    
             <tbody>
+            
             </tbody>
         </table>
         <?php endif; ?>

@@ -2,6 +2,9 @@
     header("Location: ../index.php");
 }?>
 <?php require 'layouts/user-header.php'; ?>
+
+<?php
+echo 'PHP version: ' . phpversion();?>
 <body class="text-center">
     <div class="form-signin bg-light">
     <form method="get" action="#" id="login-form">
