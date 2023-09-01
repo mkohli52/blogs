@@ -98,8 +98,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "menu-open" : "" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "menu-open" : "" ?>">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-post.php" ? "active" : "" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "active" : "" ?>">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "active" : "" ?>">
               <i class="nav-icon fas fa-pencil-alt"></i>
               <p>
                 Posts
