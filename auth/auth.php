@@ -4,12 +4,14 @@ class Auth{
     private $name;
     private $email;
     private $role;
+    private $id;
     function __construct($email) {
         $this->email = $email; 
         $sql = "SELECT * FROM users  WHERE email ='" . $email . "'";
         $result = $GLOBALS['conn']->query($sql)->fetch_assoc();
         $this->name = $result["name"];
-        $this->role = $result["roles"];   
+        $this->role = $result["roles"];
+        $this->id = $result["id"];   
     }
 
     function name(){
@@ -18,6 +20,9 @@ class Auth{
 
     function role(){
         return $this->role;
+    }
+    function id(){
+        return $this->id;
     }
 
     function roleName(){

@@ -15,6 +15,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.27/dist/sweetalert2.min.css" integrity="sha256-VJuwjrIWHWsPSEvQV4DiPfnZi7axOaiWwKfXaJnR5tA=" crossorigin="anonymous">
@@ -42,6 +43,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
+
           <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
@@ -74,7 +76,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "menu-open" : "" ?> ">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" ? "active" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/categories/create-category.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-categories.php" || $_SERVER['PHP_SELF'] == "/blogs/categories/show-category-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/user-all-posts.php"  ? "active" : "" ?>">
               <i class="nav-icon fas fa-ellipsis-h"></i>
               <p>
                 Categories
@@ -96,8 +98,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "menu-open" : "" ?>">
-            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "active" : "" ?>">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/show-post.php" || $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "active" : "" ?>">
               <i class="nav-icon fas fa-pencil-alt"></i>
               <p>
                 Posts
@@ -112,18 +114,53 @@
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../posts/show-posts-user.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/show-posts-user.php" ? "active" : "" ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>My Posts</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../posts/all-posts.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/all-posts.php" ? "active" : "" ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All Posts</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../posts/posts.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/posts.php" ? "active" : "" ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>List Posts</p>
+                </a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item ">
-            <a href="#" class="nav-link ">
+          <li class="nav-item <?= $_SERVER['PHP_SELF'] == "/blogs/user/list-users.php"  ? "menu-open" : "" ?>">
+            <a href="#" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/user/list-users.php"  ? "active" : "" ?>">
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 User
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            
+            <?php if($auth->role() != 1):?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../user/logout-user.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/posts/create-post.php" ? "active" : "" ?>">
+                <a href="../user/list-users.php" class="nav-link <?= $_SERVER['PHP_SELF'] == "/blogs/user/list-users.php"  ? "active" : "" ?>">
+                <i class="far fa-circle nav-icon"></i>
+                  <p>List Users</p>
+                </a>
+              </li>
+            </ul>
+            <?php endif;?>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../user/logout-user.php" class="nav-link ">
                   <p>Logout</p>
                 </a>
               </li>
@@ -143,9 +180,46 @@
     
 
     <!-- Main content -->
-    <div class="content mt-5">
+    <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+    <button class="accordion-button bg-secondary " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+    <i class="far fa fa-search "></i> &nbsp; Search
+    </button>
+    </h2>
+    </div>
+      <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+        <form id="search-form" >
+      <div class="input-group mb-3 p-4 border border-dark rounded">
+        <div class="input-group-prepend border border-dark">
+          <span class="input-group-text" id="inputGroup-sizing-default">Search by &nbsp
+            <select class="custom-select custom-select-sm" name=by onchange="sortChange()">
+              <option value="1">Users</option>
+              <option value="2">Categories</option>
+              <option value="3">Posts</option>
+            </select>
+          </span>
+          <span class="input-group-text" id="inputGroup-sizing-default">Sort by &nbsp
+            <select class="custom-select custom-select-sm" name=sortby onchange="sortChange()">
+              <option value="1">Newest First</option>
+              <option value="2">Oldest First</option>
+              <option value="3">A to Z</option>
+              <option value="4">Z to A</option>
+            </select>
+          </span>
+        </div>
+        <input type="text" class="form-control border border-dark" aria-label="Default" name="query" style="height: auto;" aria-describedby="inputGroup-sizing-default" onkeyup="submitForm()">
+      </div>
+        </div>
+      </div>
+    </div>
+    
+    </form> 
+    <div class="content mt-2">
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div class="card">
+          <div class="card " id="all-data">
+            
             
